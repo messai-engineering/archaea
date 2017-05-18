@@ -1,4 +1,5 @@
 import logging.config
+
 import settings as settings
 
 # Using the config file for console logging

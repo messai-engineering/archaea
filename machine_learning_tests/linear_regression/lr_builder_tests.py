@@ -1,7 +1,9 @@
 import unittest
-import sklearn.linear_model as lm
+
 import machine_learning_tests.test_data.lin_reg_data as constants
-import machine_learning.linear_regression.lin_reg_builder as lr_builder
+import sklearn.linear_model as lm
+
+import archaea.machine_learning.linear_regression.lin_reg_builder as lr_builder
 
 
 class LinearRegressionBuilderTests(unittest.TestCase):

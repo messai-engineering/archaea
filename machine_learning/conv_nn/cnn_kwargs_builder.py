@@ -1,11 +1,12 @@
 import lasagne
-from lasagne import layers
 import lasagne.updates as updates
+from lasagne import layers
+
+import archaea.machine_learning.common_utils.error_messages as error
 import conv_constants as constants
-import machine_learning.common_utils.error_messages as error
+
 
 class ConvNetArgsBuilder:
-
     def __init__(self, cnn_architecture):
         self.cnn_architecture = cnn_architecture
 
@@ -20,7 +21,7 @@ class ConvNetArgsBuilder:
         layer_properties = {}
         layer_objects = self.cnn_architecture['layers']
         if layer_objects:
-        # Constructing kwargs with layer properties and layer name tuples
+            # Constructing kwargs with layer properties and layer name tuples
             for cnn_layer in layer_objects:
                 layer_name = cnn_layer[constants.LAYER_NAME]
                 layer_tuple = (layer_name, self.layer_object_mapper(cnn_layer[constants.LAYER_TYPE]))
@@ -31,8 +32,8 @@ class ConvNetArgsBuilder:
                     layer_properties[layer_name + '_num_filters'] = cnn_layer[constants.NUMBER_OF_FILTERS]
                     layer_properties[layer_name + '_filter_size'] = cnn_layer[constants.FILTER_SIZE]
                     if cnn_layer[constants.LAYER_NONLINEARITY]:
-                        layer_properties[layer_name + '_nonlinearity'] = self.non_linearity_mapper\
-                        (cnn_layer[constants.LAYER_NONLINEARITY])
+                        layer_properties[layer_name + '_nonlinearity'] = self.non_linearity_mapper \
+                            (cnn_layer[constants.LAYER_NONLINEARITY])
                     if cnn_layer[constants.CONV_WINDOW]:
                         layer_properties[layer_name + '_W'] = self.conv_window_mapper(cnn_layer[constants.CONV_WINDOW])
                 elif cnn_layer[constants.LAYER_TYPE] == constants.MAX_POOL_2D_LAYER:
@@ -42,7 +43,7 @@ class ConvNetArgsBuilder:
                 elif cnn_layer[constants.LAYER_TYPE] == constants.DENSE_LAYER:
                     layer_properties[layer_name + '_num_units'] = cnn_layer[constants.NUM_UNITS]
                     if self.non_linearity_mapper:
-                        layer_properties[layer_name + '_nonlinearity'] = self.non_linearity_mapper\
+                        layer_properties[layer_name + '_nonlinearity'] = self.non_linearity_mapper \
                             (cnn_layer[constants.LAYER_NONLINEARITY])
                 else:
                     print 'Layer not found : ' + cnn_layer[constants.LAYER_TYPE]
@@ -65,10 +66,11 @@ class ConvNetArgsBuilder:
         :return:
         """
         layer_map = {
-            'nesterov_momentum': updates.nesterov_momentum, #Stochastic Gradient Descent (SGD) updates with Nesterov momentum
-            'sgd': updates.sgd, # Stochastic Gradient Descent (SGD)
-            'momentum': updates.momentum, #Stochastic Gradient Descent (SGD) updates with momentum
-            'adam': updates.adam, #adams update
+            'nesterov_momentum': updates.nesterov_momentum,
+        # Stochastic Gradient Descent (SGD) updates with Nesterov momentum
+            'sgd': updates.sgd,  # Stochastic Gradient Descent (SGD)
+            'momentum': updates.momentum,  # Stochastic Gradient Descent (SGD) updates with momentum
+            'adam': updates.adam,  # adams update
             'adamax': updates.adamax
         }
         return layer_map[update_name]

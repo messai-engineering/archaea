@@ -1,7 +1,8 @@
 import unittest
-import machine_learning.nueral_network.nn_trainer as bp_trainer
-import machine_learning.nueral_network.nn_trainer as trainer_lib
-import machine_learning.nueral_network.network_builder as builder
+
+import archaea.machine_learning.nueral_network.network_builder as builder
+import archaea.machine_learning.nueral_network.nn_trainer as bp_trainer
+import archaea.machine_learning.nueral_network.nn_trainer as trainer_lib
 
 
 class TestNeuralNetworkTrainerFactory(unittest.TestCase):

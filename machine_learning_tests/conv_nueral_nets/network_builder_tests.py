@@ -1,7 +1,9 @@
 import unittest
+
+import archaea.machine_learning_tests.test_data.cnn_test_data as constants
 from nolearn.lasagne import NeuralNet
-import machine_learning_tests.test_data.cnn_test_data as constants
-import machine_learning.conv_nn.network_builder as builder
+
+import archaea.machine_learning.conv_nn.network_builder as builder
 
 
 class ConvNeuralNetBuilderTests(unittest.TestCase):

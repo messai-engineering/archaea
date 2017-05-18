@@ -6,7 +6,7 @@ class NeuralNetworkTrainer:
 
     def __init__(self, parameters):
         self.network_module = parameters['network']
-        self.dataset = parameters['dataset']
+        self.dataset = parameters['dataset'] if 'dataset' in parameters else None
         self.momentum = parameters['momentum']
         self.learning_rate = parameters['learningrate']
         self.verbose = parameters['verbose']
@@ -25,13 +25,13 @@ class NeuralNetworkTrainer:
         @weightdecay :
         :return:
         """
-        # TODO Find the use of remaining parameters and the reaseon for there existence and effect on the system
+        # TODO Find the use of remaining parameters and the reason for there existence and effect on the system
         return trainers.BackpropTrainer(self.network_module,
-                                 dataset=self.dataset,
-                                 momentum=self.momentum,
-                                 learningrate=self.learning_rate,
-                                 verbose=self.verbose,
-                                 weightdecay=self.weight_decay)
+                                        dataset=self.dataset,
+                                        momentum=self.momentum,
+                                        learningrate=self.learning_rate,
+                                        verbose=self.verbose,
+                                        weightdecay=self.weight_decay)
 
     def train(self, epochs_count):
         """
@@ -45,6 +45,15 @@ class NeuralNetworkTrainer:
             j_history.append(self.trainer.train())
         return j_history
 
+    def activate(self, data):
+        """
+        Function can be used for triggering NN
+
+        :param data:
+        :return:
+        """
+        return self.network_module.activate(data)
+
     def percentage_error_on_dataset(self, datasets):
         """
         Function returns the percentage error on neural network with respect to given data
@@ -53,4 +62,4 @@ class NeuralNetworkTrainer:
         :return:
         """
         return utilities.percentError(self.trainer.testOnClassData(dataset=datasets)
-                    ,datasets['class'])
+                                      , datasets['class'])

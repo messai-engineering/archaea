@@ -1,10 +1,12 @@
 import pickle
 import unittest
+
+import archaea.machine_learning.linear_regression.lin_reg_builder as lr_builder
+import archaea.machine_learning.model_persistance.sci_learn_model as persistor
+import archaea.machine_learning_tests.test_data.lin_reg_data as constants
 import numpy as num_py
-import machine_learning_tests.test_data.lin_reg_data as constants
-import machine_learning.linear_regression.lin_reg_trainer as trainer
-import machine_learning.linear_regression.lin_reg_builder as lr_builder
-import machine_learning.model_persistance.sci_learn_model as persistor
+
+import archaea.machine_learning.linear_regression.lin_reg_trainer as trainer
 
 
 class SciLearnModelPersistenceHelperTests(unittest.TestCase):

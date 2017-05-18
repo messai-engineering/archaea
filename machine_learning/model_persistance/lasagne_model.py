@@ -1,3 +1,6 @@
+import pickle
+
+
 class LasagneModelPersistenceHelper:
 
     def __init__(self):
@@ -11,14 +14,14 @@ class LasagneModelPersistenceHelper:
         :param model_object:
         :return:
         """
-        return model_object.get_all_params_values()
+        return pickle.dumps(model_object)
 
     @staticmethod
-    def initialize_model_with_state(model_object, state):
+    def initialize_model_with_state(state):
         """
         This method re-initiates the model with the state passed.
 
         :param state:
         :return:
         """
-        return model_object.load_params_from(state)
+        return pickle.loads(state)

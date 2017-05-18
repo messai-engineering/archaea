@@ -1,8 +1,10 @@
 import unittest
+
+import archaea.machine_learning.logistic_regression.log_reg_builder as log_builder
+import archaea.machine_learning_tests.test_data.log_reg_data as constants
 from sklearn import datasets
-import machine_learning_tests.test_data.log_reg_data as constants
-import machine_learning.logistic_regression.log_reg_trainer as trainer
-import machine_learning.logistic_regression.log_reg_builder as log_builder
+
+import archaea.machine_learning.logistic_regression.log_reg_trainer as trainer
 
 
 class LogisticRegressionTrainerTests(unittest.TestCase):
@@ -11,6 +13,8 @@ class LogisticRegressionTrainerTests(unittest.TestCase):
         log_reg = log_builder.LogisticRegressionBuilder(constants.LOGISTIC_REGRESSION_PARAMS).build()
         lr_trainer = trainer.LogisticRegressionTrainer(log_reg)
         data_set = datasets.load_iris()
+        print data_set.data
+        print data_set.target
         lr_trainer.train(data_set.data, data_set.target)
         predicted = lr_trainer.predict(data_set.data)
         self.assertEqual(len(predicted), 150)

@@ -1,6 +1,8 @@
 import unittest
-import machine_learning_tests.test_data.cnn_test_data as constants
-import machine_learning.conv_nn.cnn_kwargs_builder as args_builder
+
+import archaea.machine_learning_tests.test_data.cnn_test_data as constants
+
+import archaea.machine_learning.conv_nn.cnn_kwargs_builder as args_builder
 
 
 class KwargsBuilderTests(unittest.TestCase):

@@ -1,7 +1,9 @@
-import machine_learning.nueral_network.network_builder as network_builder
-import machine_learning.common_utils.error_messages as errors
-import pybrain as py_brain
 import unittest
+
+import archaea.machine_learning.common_utils.error_messages as errors
+import pybrain as py_brain
+
+import archaea.machine_learning.nueral_network.network_builder as network_builder
 
 
 class TestNeuralNetworkBuilder(unittest.TestCase):

@@ -1,21 +1,15 @@
-import matplotlib
-import matplotlib.pyplot as plt
-import matplotlib.cm as cm
-from urllib import urlretrieve
 import cPickle as pickle
-import os
 import gzip
+import os
+from urllib import urlretrieve
+
+import archaea.machine_learning_tests.test_data.cnn_test_data as constants
+import matplotlib.cm as cm
 import numpy as np
-import theano
-import lasagne
-from lasagne import layers
-from lasagne.updates import nesterov_momentum
-from nolearn.lasagne import NeuralNet
-from nolearn.lasagne import visualize
-from sklearn.metrics import classification_report
-from sklearn.metrics import confusion_matrix
-import machine_learning_tests.test_data.cnn_test_data as constants
-import machine_learning.conv_nn.network_builder as builder
+from numpy import array, shape
+
+import archaea.machine_learning.conv_nn.network_builder as builder
+
 
 def load_dataset():
     url = 'http://deeplearning.net/data/mnist/mnist.pkl.gz'
@@ -26,9 +20,12 @@ def load_dataset():
     with gzip.open(filename, 'rb') as f:
         data = pickle.load(f)
     X_train, y_train = data[0]
+    print X_train
+    print y_train
     X_val, y_val = data[1]
     X_test, y_test = data[2]
     X_train = X_train.reshape((-1, 1, 28, 28))
+    print X_train
     X_val = X_val.reshape((-1, 1, 28, 28))
     X_test = X_test.reshape((-1, 1, 28, 28))
     y_train = y_train.astype(np.uint8)
@@ -37,14 +34,18 @@ def load_dataset():
     return X_train, y_train, X_val, y_val, X_test, y_test
 
 
-X_train, y_train, X_val, y_val, X_test, y_test = load_dataset()
-plt.imshow(X_train[0][0], cmap=cm.binary)
 
-net1 = builder.ConvNetworkBuilder(constants.CONV_NN_PARAMETERS).build()
+X_train, y_train, X_val, y_val, X_test, y_test = load_dataset()
+
+#plt.imshow(X_train[0][0], cmap=cm.binary)
+
+#net1 = builder.ConvNetworkBuilder(constants.CONV_NN_PARAMETERS).build()
 
 # Train the network
-nn = net1.fit(X_train, y_train)
-preds = net1.predict(X_test)
+#nn = net1.fit(X_train, y_train)
+#print X_test
+
+#preds = net1.predict(X_test)
 
 """
 

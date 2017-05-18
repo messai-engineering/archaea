@@ -3,14 +3,13 @@ import numpy as num_py
 
 class RidgeRegressionTrainer:
 
-    def __init__(self, ridge_regression, degree):
+    def __init__(self, ridge_regression):
         """
         Initiate the trainer with linear regression object
 
         :param linear_regression:
         """
         self.ridge_reg = ridge_regression
-        self.degree = degree
 
     def train(self, X_train, Y_train):
         """
@@ -21,7 +20,7 @@ class RidgeRegressionTrainer:
         :param Y_train: Results for supervised learning
         :return:        """
 
-        self.ridge_reg.fit(num_py.vander(X_train, self.degree + 1), Y_train)
+        self.ridge_reg.fit(X_train, Y_train)
 
     def predict(self, X):
         """
@@ -30,7 +29,7 @@ class RidgeRegressionTrainer:
         :param X:
         :return:
         """
-        return self.ridge_reg.predict(num_py.vander(X, self.degree + 1))
+        return self.ridge_reg.predict(X)
 
     def error_and_variance(self, X_test, Y_test):
         """
@@ -40,7 +39,7 @@ class RidgeRegressionTrainer:
         :param Y_test:
         :return:
         """
-        mean_error = num_py.mean(self.ridge_reg.predict(X_test - Y_test) ** 2)
+        mean_error = num_py.mean((self.predict(X_test - Y_test)) ** 2)
         variance = self.ridge_reg.score(X_test, Y_test)
         return mean_error, variance
 

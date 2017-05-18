@@ -1,7 +1,8 @@
-import machine_learning.common_utils.common_constants as constants
-import machine_learning.common_utils.error_messages as errors
-from pybrain.tools.shortcuts import buildNetwork as network_builder
 from pybrain.structure.modules import SoftmaxLayer
+from pybrain.tools.shortcuts import buildNetwork as network_builder
+
+import archaea.machine_learning.common_utils.common_constants as constants
+import archaea.machine_learning.common_utils.error_messages as errors
 
 
 class NeuralNetworkBuilder:
